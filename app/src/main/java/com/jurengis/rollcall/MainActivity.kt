@@ -1,6 +1,7 @@
 package com.jurengis.rollcall
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.face.FaceDetection
+import com.google.mlkit.vision.face.FaceDetectorOptions
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -110,8 +114,36 @@ class MainActivity : AppCompatActivity() {
 
     private class FaceDetectionAnalyzer : ImageAnalysis.Analyzer {
 
-        override fun analyze(imageProxy: ImageProxy) {
+        // High-accuracy landmark detection and face classification
+        val options = FaceDetectorOptions.Builder()
+            .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
+            .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
+            .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+            .build()
 
+        val detector = FaceDetection.getClient(options)
+
+        @SuppressLint("UnsafeExperimentalUsageError")
+        override fun analyze(imageProxy: ImageProxy) {
+            val mediaImage = imageProxy.image
+            if (mediaImage != null) {
+                val image =
+                    InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                detector.process(image)
+                    .addOnSuccessListener { faces ->
+                        if (faces.size > 0) {
+                            Log.d(TAG, "Face detected")
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        Log.d(TAG, "Fail to detect face")
+                        e.message?.let { Log.d(TAG, it) }
+                    }
+                    .addOnCompleteListener {
+                        mediaImage.close()
+                        imageProxy.close()
+                    }
+            }
         }
     }
 }
