@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             val imageAnalyzer = ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
                     it.setAnalyzer(cameraExecutor, FaceDetectionAnalyzer())
@@ -132,6 +133,7 @@ class MainActivity : AppCompatActivity() {
                 detector.process(image)
                     .addOnSuccessListener { faces ->
                         if (faces.size > 0) {
+
                             Log.d(TAG, "Face detected")
                         }
                     }
@@ -140,6 +142,7 @@ class MainActivity : AppCompatActivity() {
                         e.message?.let { Log.d(TAG, it) }
                     }
                     .addOnCompleteListener {
+                        // avoid blocking the production of further images
                         mediaImage.close()
                         imageProxy.close()
                     }
