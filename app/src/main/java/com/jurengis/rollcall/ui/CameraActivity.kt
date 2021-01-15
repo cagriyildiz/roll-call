@@ -1,4 +1,4 @@
-package com.jurengis.rollcall
+package com.jurengis.rollcall.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -15,23 +15,24 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
-import kotlinx.android.synthetic.main.activity_main.*
+import com.jurengis.rollcall.R
+import kotlinx.android.synthetic.main.activity_camera.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class MainActivity : AppCompatActivity() {
+class CameraActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
 
     companion object {
-        private const val TAG = "MainActivity"
+        private const val TAG = "CameraActivity"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_camera)
 
         // Request camera permissions
         if (allPermissionsGranted()) {
