@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.jurengis.rollcall.ui.fragments.LoginFragment"
+        android:name="com.jurengis.rollcall.ui.fragments.SignInFragment"
         android:label="LoginFragment" />
 </navigation>
