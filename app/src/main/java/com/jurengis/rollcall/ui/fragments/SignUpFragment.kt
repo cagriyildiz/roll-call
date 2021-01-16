@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
@@ -29,30 +31,37 @@ class SignUpFragment : Fragment(R.layout.fragment_signup) {
 
     private fun bindRegisterButton() {
         btnRegister.setOnClickListener {
-            registerUser()
-        }
-    }
-
-    private fun registerUser() {
-        val email = tfSignUpEmail.editText?.text.toString().trim()
-        val password = tfSignUpPassword.editText?.text.toString().trim()
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            CoroutineScope(Dispatchers.IO).launch {
-                auth.createUserWithEmailAndPassword(email, password)
-                withContext(Dispatchers.Main) {
-                    isUserLoggedIn()
+            val email = tfSignUpEmail.editText?.text.toString().trim()
+            val password = tfSignUpPassword.editText?.text.toString().trim()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    val signUpSuccessful = signUp(email, password)
+                    updateUIAfterSignUp(signUpSuccessful)
                 }
             }
         }
     }
 
-    private fun isUserLoggedIn() {
-        if (auth.currentUser == null) {
-            Log.d(TAG, "isUserLoggedIn:failure")
-            Toast.makeText(context, "Cannot create account", Toast.LENGTH_SHORT).show()
-        } else {
-            Log.d(TAG, "isUserLoggedIn:success")
-            Toast.makeText(context, "Account created successfully", Toast.LENGTH_SHORT).show()
+    private suspend fun signUp(email: String, password: String): Boolean {
+        return try {
+            auth.createUserWithEmailAndPassword(email, password).await()
+            true
+        } catch (e: Exception) {
+            Log.d(TAG, "createUserWithEmailAndPassword:failure")
+            e.message?.let { Log.d(TAG, it) }
+            false
+        }
+    }
+
+    private suspend fun updateUIAfterSignUp(signUpSuccessful: Boolean) {
+        withContext(Dispatchers.Main) {
+            if (signUpSuccessful && auth.currentUser != null) {
+                Log.d(TAG, "createUserWithEmailAndPassword:success")
+                Toast.makeText(context, "Account created successfully", Toast.LENGTH_SHORT).show()
+            } else {
+                Log.d(TAG, "createUserWithEmailAndPassword:failure")
+                Toast.makeText(context, "Cannot create account", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
