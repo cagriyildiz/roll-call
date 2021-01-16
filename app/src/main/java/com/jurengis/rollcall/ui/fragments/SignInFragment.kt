@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.jurengis.rollcall.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_signin.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,14 +16,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_signin) {
 
-    private lateinit var auth : FirebaseAuth
+    @Inject lateinit var auth : FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = FirebaseAuth.getInstance()
         bindEvents()
     }
 
