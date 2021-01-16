@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/rollcall_nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/signInFragment"
         android:name="com.jurengis.rollcall.ui.fragments.SignInFragment"
-        android:label="LoginFragment" >
+        android:label="SignInFragment" >
         <action
-            android:id="@+id/action_loginFragment_to_signUpFragment"
+            android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signInFragment_to_courseFragment"
+            app:destination="@id/courseFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -18,5 +25,17 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.jurengis.rollcall.ui.fragments.SignUpFragment"
-        android:label="SignUpFragment" />
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_courseFragment"
+            app:destination="@id/courseFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseFragment"
+        android:name="com.jurengis.rollcall.ui.fragments.AvailableCoursesFragment"
+        android:label="CourseFragment" />
 </navigation>

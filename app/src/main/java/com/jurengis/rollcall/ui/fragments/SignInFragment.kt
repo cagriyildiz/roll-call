@@ -51,7 +51,7 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
         tvSignUpButton.setOnClickListener {
             Log.d(TAG, "tvSignUpButton:clicked")
             findNavController().navigate(
-                R.id.action_loginFragment_to_signUpFragment,
+                R.id.action_signInFragment_to_signUpFragment,
             )
         }
     }
@@ -71,6 +71,9 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
             if (authenticationSuccessful && auth.currentUser != null) {
                 Log.d(TAG, "signInWithEmailAndPassword:success")
                 Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(
+                    R.id.action_signInFragment_to_courseFragment
+                )
             } else {
                 Log.d(TAG, "signInWithEmailAndPassword:failure")
                 Toast.makeText(context, "Authentication failed", Toast.LENGTH_SHORT).show()
