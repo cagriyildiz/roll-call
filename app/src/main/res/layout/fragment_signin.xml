@@ -36,7 +36,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfLoginPassword"
+        android:id="@+id/tfSignInPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="320dp"
         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.84"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tfSignInPassword" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfLoginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/tfSignInPassword" />
 
     <LinearLayout
         android:layout_width="wrap_content"
