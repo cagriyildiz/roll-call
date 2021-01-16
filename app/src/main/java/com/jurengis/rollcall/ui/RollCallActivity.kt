@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.jurengis.rollcall.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_rollcall.*
 
+@AndroidEntryPoint
 class RollCallActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
