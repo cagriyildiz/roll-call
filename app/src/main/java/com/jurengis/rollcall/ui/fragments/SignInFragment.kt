@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.jurengis.rollcall.R
 import kotlinx.android.synthetic.main.fragment_signin.*
@@ -47,11 +48,9 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
     private fun bindSignUpButton() {
         tvSignUpButton.setOnClickListener {
             Log.d(TAG, "tvSignUpButton:clicked")
-            parentFragmentManager.beginTransaction().apply {
-                replace(R.id.rollCallNavHostFragment, SignUpFragment())
-                addToBackStack(null)
-                commit()
-            }
+            findNavController().navigate(
+                R.id.action_loginFragment_to_signUpFragment,
+            )
         }
     }
 
