@@ -45,7 +45,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
-    implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -66,5 +65,15 @@ dependencies {
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
+    // BLE
     implementation "org.altbeacon:android-beacon-library:2.17.1"
+
+    // Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:26.3.0')
+
+    // Firebase Auth
+    implementation 'com.google.firebase:firebase-auth'
+    // Cloud Firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
 }
