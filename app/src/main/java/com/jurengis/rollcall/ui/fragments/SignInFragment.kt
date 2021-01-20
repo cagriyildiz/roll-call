@@ -5,17 +5,16 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.jurengis.rollcall.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_signin.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -39,7 +38,7 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
             val email = tfSignInEmail.editText?.text.toString().trim()
             val password = tfSignInPassword.editText?.text.toString().trim()
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                CoroutineScope(Dispatchers.IO).launch {
+                lifecycleScope.launch(Dispatchers.IO) {
                     val authenticationSuccessful = login(email, password)
                     updateUIAfterLogin(authenticationSuccessful)
                 }
