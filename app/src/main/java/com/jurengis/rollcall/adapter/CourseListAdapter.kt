@@ -46,7 +46,7 @@ class CourseListAdapter : RecyclerView.Adapter<CourseListAdapter.CourseViewHolde
         val course = differ.currentList[position]
         holder.itemView.apply {
             tvClassRoom.text = course.classRoom
-            tvCourseName.text = course.name
+            tvCourseName.text = course.courseName
             tvInstructor.text = course.instructor
             setOnClickListener {
                 onItemClickListener?.let { it(course) }
