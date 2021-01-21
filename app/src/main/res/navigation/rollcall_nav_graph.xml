@@ -37,5 +37,21 @@
     <fragment
         android:id="@+id/courseListFragment"
         android:name="com.jurengis.rollcall.ui.fragments.CourseListFragment"
-        android:label="CourseListFragment" />
+        android:label="CourseListFragment" >
+        <action
+            android:id="@+id/action_courseListFragment_to_courseEnrollFragment"
+            app:destination="@id/courseEnrollFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/courseEnrollFragment"
+        android:name="com.jurengis.rollcall.ui.fragments.CourseEnrollFragment"
+        android:label="CourseEnrollFragment" >
+        <argument
+            android:name="course"
+            app:argType="com.jurengis.rollcall.model.Course" />
+    </fragment>
 </navigation>
