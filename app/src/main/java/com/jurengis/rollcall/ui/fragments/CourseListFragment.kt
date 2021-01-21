@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jurengis.rollcall.R
 import com.jurengis.rollcall.adapter.CourseListAdapter
@@ -24,7 +25,20 @@ class CourseListFragment : Fragment(R.layout.fragment_course_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        bindEvents()
         requestLocationPermission()
+    }
+
+    private fun bindEvents() {
+        courseListAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable("course", it)
+            }
+            findNavController().navigate(
+                R.id.action_courseListFragment_to_courseEnrollFragment,
+                bundle
+            )
+        }
     }
 
     private fun observeCourses() {
