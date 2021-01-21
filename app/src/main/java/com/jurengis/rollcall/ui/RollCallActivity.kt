@@ -25,7 +25,7 @@ class RollCallActivity : AppCompatActivity() {
         rollCallNavHostFragment.findNavController()
             .addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
-                    R.id.courseFragment -> bottomNavigationMenu.visibility = View.VISIBLE
+                    R.id.courseListFragment -> bottomNavigationMenu.visibility = View.VISIBLE
                     else -> bottomNavigationMenu.visibility = View.GONE
                 }
             }

@@ -15,8 +15,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_signInFragment_to_courseFragment"
-            app:destination="@id/courseFragment"
+            android:id="@+id/action_signInFragment_to_courseListFragment"
+            app:destination="@id/courseListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -27,15 +27,15 @@
         android:name="com.jurengis.rollcall.ui.fragments.SignUpFragment"
         android:label="SignUpFragment" >
         <action
-            android:id="@+id/action_signUpFragment_to_courseFragment"
-            app:destination="@id/courseFragment"
+            android:id="@+id/action_signUpFragment_to_courseListFragment"
+            app:destination="@id/courseListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/courseFragment"
+        android:id="@+id/courseListFragment"
         android:name="com.jurengis.rollcall.ui.fragments.CourseListFragment"
-        android:label="CourseFragment" />
+        android:label="CourseListFragment" />
 </navigation>

@@ -71,7 +71,7 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
                 Log.d(TAG, "signInWithEmailAndPassword:success")
                 Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(
-                    R.id.action_signInFragment_to_courseFragment
+                    R.id.action_signInFragment_to_courseListFragment
                 )
             } else {
                 Log.d(TAG, "signInWithEmailAndPassword:failure")
