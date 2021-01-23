@@ -53,22 +53,11 @@ class CourseListViewModel @ViewModelInject constructor(
         )
     }
 
-    private suspend fun getAllCourses(): MutableList<Course> {
-        val courseList = mutableListOf<Course>()
-        val documents = firestore
-            .collection("courses")
-            .get()
-            .await()
-            .documents
-        documents.forEach {
-            val course = it.toObject(Course::class.java)
-            if (course != null) {
-                course.id = it.id
-                courseList.add(course)
-            }
-        }
-        return courseList
-    }
+    private suspend fun getAllCourses(): MutableList<Course> = firestore
+        .collection("courses")
+        .get()
+        .await()
+        .toObjects(Course::class.java)
 
     private suspend fun mapBeaconsToCourses(
         detectedBeacons: MutableCollection<Beacon>
