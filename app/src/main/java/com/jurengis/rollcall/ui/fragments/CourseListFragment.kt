@@ -35,7 +35,7 @@ class CourseListFragment : Fragment(R.layout.fragment_course_list) {
                 putSerializable("course", it)
             }
             findNavController().navigate(
-                R.id.action_courseListFragment_to_courseEnrollFragment,
+                R.id.action_courseListFragment_to_courseEnrollmentFragment,
                 bundle
             )
         }

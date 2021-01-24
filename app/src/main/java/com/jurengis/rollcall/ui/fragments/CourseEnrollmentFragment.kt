@@ -10,14 +10,14 @@ import com.jurengis.rollcall.R
 import com.jurengis.rollcall.adapter.CourseEnrollmentAdapter
 import com.jurengis.rollcall.ui.CourseEnrollmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_course_enroll.*
+import kotlinx.android.synthetic.main.fragment_course_enrollment.*
 
 @AndroidEntryPoint
-class CourseEnrollFragment : Fragment(R.layout.fragment_course_enroll) {
+class CourseEnrollmentFragment : Fragment(R.layout.fragment_course_enrollment) {
 
     lateinit var courseEnrollmentAdapter: CourseEnrollmentAdapter
     private val viewModel: CourseEnrollmentViewModel by viewModels()
-    private val args: CourseEnrollFragmentArgs by navArgs()
+    private val args: CourseEnrollmentFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
