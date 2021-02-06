@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jurengis.rollcall.R
 import com.jurengis.rollcall.adapter.CourseEnrollmentAdapter
+import com.jurengis.rollcall.model.Enrollment
 import com.jurengis.rollcall.ui.CameraActivity
 import com.jurengis.rollcall.ui.CourseEnrollmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,8 +54,19 @@ class CourseEnrollmentFragment : Fragment(R.layout.fragment_course_enrollment) {
     private fun observeEnrollmentList() {
         viewModel.enrollments.observe(viewLifecycleOwner, { enrollmentList ->
             enrollmentList?.let {
-                courseEnrollmentAdapter.differ.submitList(enrollmentList)
+                updateRecyclerView(enrollmentList)
+                updateCurrentWeekText(enrollmentList)
             }
         })
+    }
+
+    private fun updateRecyclerView(enrollmentList: List<Enrollment>?) {
+        courseEnrollmentAdapter.differ.submitList(enrollmentList)
+    }
+
+    private fun updateCurrentWeekText(enrollmentList: List<Enrollment>) {
+        val currentWeek = enrollmentList.size + 1
+        val currentWeekText = String.format(getString(R.string.week), currentWeek)
+        tvEnrollCurrentWeek.text = currentWeekText
     }
 }
