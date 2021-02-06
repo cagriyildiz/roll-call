@@ -1,4 +1,4 @@
-package com.jurengis.rollcall.ui
+package com.jurengis.rollcall.ui.viewmodel
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
