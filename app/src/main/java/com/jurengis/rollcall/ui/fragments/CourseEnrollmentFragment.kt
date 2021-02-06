@@ -1,5 +1,6 @@
 package com.jurengis.rollcall.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jurengis.rollcall.R
 import com.jurengis.rollcall.adapter.CourseEnrollmentAdapter
+import com.jurengis.rollcall.ui.CameraActivity
 import com.jurengis.rollcall.ui.CourseEnrollmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_course_enrollment.*
@@ -21,9 +23,17 @@ class CourseEnrollmentFragment : Fragment(R.layout.fragment_course_enrollment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        bindEvents()
         setCourseProperties()
         setupRecyclerView()
         observeEnrollmentList()
+    }
+
+    private fun bindEvents() {
+        btnEnroll.setOnClickListener {
+            val intent = Intent(activity, CameraActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setCourseProperties() {
