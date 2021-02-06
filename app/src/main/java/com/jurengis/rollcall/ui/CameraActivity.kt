@@ -1,28 +1,29 @@
 package com.jurengis.rollcall.ui
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.face.FaceDetection
-import com.google.mlkit.vision.face.FaceDetectorOptions
+import com.jurengis.rollcall.ui.viewmodel.FaceDetectionAnalyzer
 import com.jurengis.rollcall.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_camera.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+@AndroidEntryPoint
 class CameraActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
+    private val viewModel: FaceDetectionAnalyzer by viewModels()
 
     companion object {
         private const val TAG = "CameraActivity"
@@ -33,8 +34,12 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+        observeRecognizedFace()
+        requestCameraPermission()
+        cameraExecutor = Executors.newSingleThreadExecutor()
+    }
 
-        // Request camera permissions
+    private fun requestCameraPermission() {
         if (allPermissionsGranted()) {
             startCamera()
         } else {
@@ -42,8 +47,15 @@ class CameraActivity : AppCompatActivity() {
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
+    }
 
-        cameraExecutor = Executors.newSingleThreadExecutor()
+    private fun observeRecognizedFace() {
+        viewModel.faceRecognized.observe(this, { recognized ->
+            if (recognized) {
+                // if the face is successfully recognized then close the camera
+                finish()
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -92,7 +104,7 @@ class CameraActivity : AppCompatActivity() {
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
                 .also {
-                    it.setAnalyzer(cameraExecutor, FaceDetectionAnalyzer())
+                    it.setAnalyzer(cameraExecutor, viewModel)
                 }
 
             // Select back camera as a default
@@ -112,42 +124,5 @@ class CameraActivity : AppCompatActivity() {
             }
 
         }, ContextCompat.getMainExecutor(this))
-    }
-
-    private class FaceDetectionAnalyzer : ImageAnalysis.Analyzer {
-
-        // High-accuracy landmark detection and face classification
-        val options = FaceDetectorOptions.Builder()
-            .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
-            .setLandmarkMode(FaceDetectorOptions.LANDMARK_MODE_ALL)
-            .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
-            .build()
-
-        val detector = FaceDetection.getClient(options)
-
-        @SuppressLint("UnsafeExperimentalUsageError")
-        override fun analyze(imageProxy: ImageProxy) {
-            val mediaImage = imageProxy.image
-            if (mediaImage != null) {
-                val image =
-                    InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-                detector.process(image)
-                    .addOnSuccessListener { faces ->
-                        if (faces.size > 0) {
-
-                            Log.d(TAG, "Face detected")
-                        }
-                    }
-                    .addOnFailureListener { e ->
-                        Log.d(TAG, "Fail to detect face")
-                        e.message?.let { Log.d(TAG, it) }
-                    }
-                    .addOnCompleteListener {
-                        // avoid blocking the production of further images
-                        mediaImage.close()
-                        imageProxy.close()
-                    }
-            }
-        }
     }
 }
