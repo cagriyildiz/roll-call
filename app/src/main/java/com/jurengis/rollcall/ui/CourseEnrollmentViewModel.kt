@@ -38,15 +38,15 @@ class CourseEnrollmentViewModel @ViewModelInject constructor(
                     .get()
                     .await()
                 val course = courseDocument.toObject(CourseEnrollment::class.java)
-                val enrollment = mapToEnrollment(course)
+                val enrollment = setWeeks(course?.enrollment)
                 enrollments.postValue(enrollment)
             }
         }
     }
 
-    private fun mapToEnrollment(course: CourseEnrollment?): List<Enrollment>? {
-        return course?.enrollment?.flatMap { entry: Map.Entry<String, Boolean> ->
-            listOf(Enrollment(entry.key, entry.value))
+    private fun setWeeks(enrollment: List<Enrollment>?): List<Enrollment>? {
+        return enrollment?.mapIndexed { idx, item  ->
+            Enrollment("Week ${idx+1}", item.date, item.status)
         }
     }
 }

@@ -62,10 +62,11 @@ class CourseEnrollmentAdapter :
         position: Int
     ) {
         val courseEnrollment = differ.currentList[position]
-        val status = if (courseEnrollment.status) R.string.enrollment_status_present else R.string.enrollment_status_absent
+        val status = if (courseEnrollment.status) R.drawable.ic_done else R.drawable.ic_not_done
         holder.itemView.apply {
             tvWeek.text = courseEnrollment.week
-            tvEnrollmentStatus.text = applicationContext.get()?.getString(status)
+            tvWeekDate.text = courseEnrollment.date.toDate().toString()
+            ivEnrollmentStatus.setImageResource(status)
             setOnClickListener {
                 onItemClickListener?.let { it(courseEnrollment) }
             }
