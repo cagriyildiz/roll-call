@@ -8,4 +8,6 @@
     <color name="indigo_a200_dark">#0043ca</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red_a700">#d50000</color>
+    <color name="green_a700">#00c853</color>
 </resources>
