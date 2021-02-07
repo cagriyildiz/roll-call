@@ -12,7 +12,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
-import com.jurengis.rollcall.ui.viewmodel.FaceDetectionAnalyzer
+import com.jurengis.rollcall.viewmodel.FaceDetectionAnalyzer
 import com.jurengis.rollcall.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_camera.*

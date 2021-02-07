@@ -1,4 +1,4 @@
-package com.jurengis.rollcall.ui.viewmodel
+package com.jurengis.rollcall.viewmodel
 
 import android.annotation.SuppressLint
 import android.util.Log

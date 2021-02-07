@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jurengis.rollcall.R
 import com.jurengis.rollcall.adapter.CourseListAdapter
-import com.jurengis.rollcall.ui.viewmodel.CourseListViewModel
+import com.jurengis.rollcall.viewmodel.CourseListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_course_list.*
 

@@ -11,7 +11,7 @@ import com.jurengis.rollcall.R
 import com.jurengis.rollcall.adapter.CourseEnrollmentAdapter
 import com.jurengis.rollcall.model.Enrollment
 import com.jurengis.rollcall.ui.CameraActivity
-import com.jurengis.rollcall.ui.viewmodel.CourseEnrollmentViewModel
+import com.jurengis.rollcall.viewmodel.CourseEnrollmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_course_enrollment.*
 
