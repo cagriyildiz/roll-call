@@ -1,4 +1,4 @@
-package com.jurengis.rollcall.ui.fragments
+package com.jurengis.rollcall.ui.fragment
 
 import android.Manifest
 import android.content.pm.PackageManager
