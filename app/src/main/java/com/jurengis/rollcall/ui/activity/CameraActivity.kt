@@ -1,4 +1,4 @@
-package com.jurengis.rollcall.ui
+package com.jurengis.rollcall.ui.activity
 
 import android.Manifest
 import android.content.pm.PackageManager
