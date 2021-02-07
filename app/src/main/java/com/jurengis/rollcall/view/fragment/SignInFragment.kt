@@ -1,4 +1,4 @@
-package com.jurengis.rollcall.ui.fragment
+package com.jurengis.rollcall.view.fragment
 
 import android.os.Bundle
 import android.util.Log

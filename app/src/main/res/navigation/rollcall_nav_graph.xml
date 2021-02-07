@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.jurengis.rollcall.ui.fragment.SignInFragment"
+        android:name="com.jurengis.rollcall.view.fragment.SignInFragment"
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.jurengis.rollcall.ui.fragment.SignUpFragment"
+        android:name="com.jurengis.rollcall.view.fragment.SignUpFragment"
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_courseListFragment"
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/courseListFragment"
-        android:name="com.jurengis.rollcall.ui.fragment.CourseListFragment"
+        android:name="com.jurengis.rollcall.view.fragment.CourseListFragment"
         android:label="CourseListFragment" >
         <action
             android:id="@+id/action_courseListFragment_to_courseEnrollmentFragment"
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/courseEnrollmentFragment"
-        android:name="com.jurengis.rollcall.ui.fragment.CourseEnrollmentFragment"
+        android:name="com.jurengis.rollcall.view.fragment.CourseEnrollmentFragment"
         android:label="CourseEnrollFragment" >
         <argument
             android:name="course"
